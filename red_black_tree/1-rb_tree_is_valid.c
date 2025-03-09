@@ -1,9 +1,12 @@
 #include "rb_trees.h"
 
 
-void inorder(const rb_tree_t *tree, void (*func)(int, int *, int *),
-		int *store, int *flag,
-		int black_height, int *expected_black_height);
+void in_order(const rb_tree_t *tree,
+		void (*func)(int, int *, int *),
+		int *val_stored,
+		int *flag,
+		int black_height,
+		int *expected_black_height);
 int check_red_adjacent(const rb_tree_t *tree);
 void check_sorted(int val, int *store, int *flag);
 
@@ -38,14 +41,14 @@ int rb_tree_is_valid(const rb_tree_t *tree)
 	val_stored = 0;
 	expected_black_height = -1;
 
-	inorder(tree, check_sorted, &val_stored, &flag, 0, &expected_black_height);
+	in_order(tree, check_sorted, &val_stored, &flag, 0, &expected_black_height);
 
 	return (flag);
 }
 
 
 /**
- * inorder - navigates a tree in order
+ * in_order - navigates a tree in order
  * @tree: the tree in question
  * @func: the function to perform on the tree
  * @val_stored: the stored value of the previous tree->n
@@ -53,10 +56,9 @@ int rb_tree_is_valid(const rb_tree_t *tree)
  * @black_height: the current black height of tree
  * @expected_black_height: the expected black height to compare
  *
- * Return: we don' need no stinkin' returns
+ * Return: no return
  */
-
-void inorder(const rb_tree_t *tree,
+void in_order(const rb_tree_t *tree,
 		void (*func)(int, int *, int *), int *val_stored, int *flag,
 		int black_height, int *expected_black_height)
 {
@@ -86,13 +88,13 @@ void inorder(const rb_tree_t *tree,
 		}
 	}
 	if (*flag && tree->left)
-		inorder(tree->left, func, val_stored, flag,
+		in_order(tree->left, func, val_stored, flag,
 			       black_height, expected_black_height);
 	if (*flag)
 		func(tree->n, val_stored, flag);
 
 	if (*flag && tree->right)
-		inorder(tree->right, func, val_stored, flag,
+		in_order(tree->right, func, val_stored, flag,
 				black_height, expected_black_height);
 }
 
