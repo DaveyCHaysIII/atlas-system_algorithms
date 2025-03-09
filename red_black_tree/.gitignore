@@ -1,2 +1,7 @@
 *.swp
 rb_tree_print.c
+rb_tree_node
+rb_tree_valid
+rb_tree_insert
+rb_tree_array
+
