@@ -62,9 +62,20 @@ void in_order(const rb_tree_t *tree,
 		void (*func)(int, int *, int *), int *val_stored, int *flag,
 		int black_height, int *expected_black_height)
 {
-	if (!tree || !func)
+	if (!tree)
+	{
+		black_height++;
+		if (*expected_black_height == -1)
+			*expected_black_height = black_height;
+		else if (*expected_black_height != black_height)
+		{
+			*flag = 0;
+			return; /* Check Case 5 */
+		}
 		return;
-
+	}
+	if (tree->color == BLACK)
+		black_height++;
 	if (tree->color != BLACK && tree->color != RED)
 	{
 		*flag = 0;
@@ -75,27 +86,16 @@ void in_order(const rb_tree_t *tree,
 		*flag = 0;
 		return; /* Check for Case 4 */
 	}
-	if (tree->color == BLACK)
-		black_height++;
-	if (!tree->left && !tree->right)
+	if (*flag)
 	{
-		if (*expected_black_height == -1)
-			*expected_black_height = black_height;
-		else if (*expected_black_height != black_height)
-		{
-			*flag = 0;
-			return; /* Check Case 5 */
-		}
-	}
-	if (*flag && tree->left)
 		in_order(tree->left, func, val_stored, flag,
 			       black_height, expected_black_height);
-	if (*flag)
+
 		func(tree->n, val_stored, flag);
 
-	if (*flag && tree->right)
 		in_order(tree->right, func, val_stored, flag,
 				black_height, expected_black_height);
+	}
 }
 
 /**
