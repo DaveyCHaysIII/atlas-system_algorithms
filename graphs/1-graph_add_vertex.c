@@ -28,12 +28,12 @@ vertex_t *graph_add_vertex(graph_t *graph, const char *str)
 		graph->vertices = new_vertex;
 		return (new_vertex);
 	}
-	for (current = graph->vertices;
-	     current->next != NULL;
-	     current = current->next)
+	for (current = graph->vertices;; current = current->next)
 	{
 		if (strcmp(current->content, str) == 0)
 			return (NULL);
+		if (current->next == NULL)
+			break;
 	}
 
 	new_vertex->index = current->index + 1;
