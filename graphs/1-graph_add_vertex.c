@@ -16,7 +16,7 @@ vertex_t *graph_add_vertex(graph_t *graph, const char *str)
 	if (!new_vertex)
 		return (NULL);
 
-	new_vertex->content = (char *)str;
+	new_vertex->content = strdup(str);
 	new_vertex->nb_edges = 0;
 	new_vertex->edges = NULL;
 	new_vertex->next = NULL;
