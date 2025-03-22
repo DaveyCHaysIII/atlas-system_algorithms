@@ -31,7 +31,11 @@ vertex_t *graph_add_vertex(graph_t *graph, const char *str)
 	for (current = graph->vertices;; current = current->next)
 	{
 		if (strcmp(current->content, str) == 0)
+		{
+			free(new_vertex->content);
+			free(new_vertex);
 			return (NULL);
+		}
 		if (current->next == NULL)
 			break;
 	}
