@@ -71,6 +71,20 @@ typedef struct graph_s
     vertex_t    *vertices;
 } graph_t;
 
+/**
+ * struct queue_s - defines the queue data structure for BFS
+ * @arr: pointer to the array in the queue
+ * @front: the head of the array
+ * @rear: the end of the current queue
+ */
+typedef struct queue_s
+{
+	vertex_t **arr;
+	size_t front;
+	size_t rear;
+	size_t size;
+} queue_t;
+
 /* functions */
 void graph_display(const graph_t *graph);
 graph_t *graph_create(void);
