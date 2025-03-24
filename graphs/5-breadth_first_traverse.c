@@ -24,7 +24,7 @@ size_t breadth_first_traverse(const graph_t *graph,
 	if (!graph || !action || !graph->vertices)
 		return (0);
 	q = init_queue(graph->nb_vertices);
-	visited = malloc(sizeof(size_t) * graph->nb_vertices);
+	visited = calloc(graph->nb_vertices, sizeof(size_t));
 	depth = next_level_nodes = 0;
 	current = graph->vertices;
 	enqueue(q, current);
