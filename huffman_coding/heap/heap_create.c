@@ -13,7 +13,7 @@ heap_t *heap_create(int (*data_cmp)(void *, void *))
 
 	new_heap = malloc(sizeof(heap_t));
 	if (!new_heap)
-		return (EXIT_FAILURE);
+		return (NULL);
 	new_heap->size = 0;
 	new_heap->data_cmp = data_cmp;
 	new_heap->root = NULL;
