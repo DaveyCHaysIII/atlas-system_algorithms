@@ -68,6 +68,7 @@ queue_t *create_queue(void);
 void free_queue(queue_t *q);
 void enqueue(queue_t *q, const binary_tree_node_t *node);
 const binary_tree_node_t *dequeue(queue_t *q);
+binary_tree_node_t *bfs_find(heap_t *heap, int flag);
 /*bubble_up*/
 /*bubble_down*/
 

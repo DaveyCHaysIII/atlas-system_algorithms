@@ -84,3 +84,45 @@ const binary_tree_node_t *dequeue(queue_t *q)
 	return (node);
 }
 
+/**
+ * bfs_find - finds either the last node inserted or the next NULL node
+ * @heap: the heap to search through
+ * @flag: determines which to output - 0 for insert, 1 for last inserted
+ *
+ * Return: either next NULL or last inserted
+ */
+
+binary_tree_node_t *bfs_find(heap_t *heap, int flag)
+{
+	queue_t *q;
+	binary_tree_node_t *current;
+
+	if (!heap || !heap->root)
+		return (NULL);
+
+	q = create_queue();
+	current = NULL;
+	enqueue(q, heap->root);
+	while (q->front != NULL)
+	{
+		current = (binary_tree_node_t *)dequeue(q);
+		if (!flag)
+		{
+			if (!current->left || !current->right)
+			{
+				free_queue(q);
+				return (current);
+			}
+		}
+		else if (flag == 1)
+		{
+
+		}
+		if (current->left)
+			enqueue(q, current->left);
+		if (current->right)
+			enqueue(q, current->right);
+	}
+	free_queue(q);
+	return (current);
+}

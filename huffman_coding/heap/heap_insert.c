@@ -13,7 +13,6 @@ void bubble_up(heap_t *heap, binary_tree_node_t *current);
 binary_tree_node_t *heap_insert(heap_t *heap, void *data)
 {
 	binary_tree_node_t *new_node, *current;
-	queue_t *q;
 
 	if (!heap || !data)
 		return (NULL);
@@ -25,33 +24,17 @@ binary_tree_node_t *heap_insert(heap_t *heap, void *data)
 		heap->size++;
 		return (new_node);
 	}
-	q = create_queue();
-	enqueue(q, heap->root);
-	while (q->front != NULL)
-	{
-		current = (binary_tree_node_t *)dequeue(q);
-		if (current->left == NULL)
-		{
-			heap->size++;
-			current->left = new_node;
-			new_node->parent = current;
-			free_queue(q);
-			bubble_up(heap, new_node);
-			return (new_node);
-		}
-		else if (current->right == NULL)
-		{
-			heap->size++;
-			current->right = new_node;
-			new_node->parent = current;
-			free_queue(q);
-			bubble_up(heap, new_node);
-			return (new_node);
-		}
-		enqueue(q, current->left);
-		enqueue(q, current->right);
-	}
-	return (NULL);
+
+	heap->size++;
+	current = bfs_find(heap, 0);
+	new_node->parent = current;
+	if (current->left == NULL)
+		current->left = new_node;
+	else
+		current->right = new_node;
+
+	bubble_up(heap, new_node);
+	return (new_node);
 }
 
 /**
