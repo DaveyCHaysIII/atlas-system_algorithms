@@ -1,0 +1,11 @@
+*.swp
+heap_create
+binary_tree_node
+heap_insert
+heap_extract
+heap_delete
+symbol_create
+prio
+extract
+huffman_tree
+huffman_codes
