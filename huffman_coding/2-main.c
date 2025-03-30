@@ -76,3 +76,4 @@ int main(void)
     }
     printf("Heap size: %lu\n", heap->size);
     return (EXIT_SUCCESS);
+}

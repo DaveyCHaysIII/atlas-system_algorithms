@@ -36,20 +36,39 @@ typedef struct heap_s
 	binary_tree_node_t *root;
 } heap_t;
 
-/* Primary functions */
+/**
+ * struct queue_node - queue node data structure
+ * @node: the binary tree node it holds
+ * @next: the next binary tree node in line
+ */
+typedef struct queue_node
+{
+	const binary_tree_node_t *node;
+	struct queue_node *next;
+} queue_node_t;
 
+/**
+ * struct queue - queue data structure
+ * @front: the front node of the queue
+ * @rear: the rear node of the data structure
+ */
+typedef struct queue
+{
+	queue_node_t *front, *rear;
+} queue_t;
+
+/* primary functions */
 heap_t *heap_create(int (*data_cmp)(void *, void *));
 binary_tree_node_t *binary_tree_node(binary_tree_node_t *parent, void *data);
 binary_tree_node_t *heap_insert(heap_t *heap, void *data);
 void *heap_extract(heap_t *heap);
 
-/* Heap_utils */
-
-/*swap*/
+/* heap_utils */
+queue_t *create_queue(void);
+void free_queue(queue_t *q);
+void enqueue(queue_t *q, const binary_tree_node_t *node);
+const binary_tree_node_t *dequeue(queue_t *q);
 /*bubble_up*/
 /*bubble_down*/
-/*create_queue*/
-/*enqueue*/
-/*dequeue*/
 
 #endif
