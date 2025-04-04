@@ -48,5 +48,8 @@ heap_t *huffman_priority_queue(char *data, size_t *freq, size_t size)
 
 int symbol_cmp(void *a, void *b)
 {
-	return (((symbol_t *)a)->freq - ((symbol_t *)b)->freq);
+	symbol_t *symbol_a = (symbol_t *)(((binary_tree_node_t *)a)->data);
+	symbol_t *symbol_b = (symbol_t *)(((binary_tree_node_t *)b)->data);
+
+	return ((int)(symbol_a->freq - symbol_b->freq));
 }

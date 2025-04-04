@@ -51,8 +51,6 @@ void bubble_up(heap_t *heap, binary_tree_node_t *current)
 
 	if (!heap || !current || !current->parent)
 		return;
-	if (current == heap->root)
-		return;
 
 	while (current->parent &&
 	       heap->data_cmp(current->data, current->parent->data) < 0)
