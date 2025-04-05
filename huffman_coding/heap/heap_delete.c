@@ -1,7 +1,5 @@
 #include "heap.h"
 
-void heap_delete_tree(binary_tree_node_t *root, void (*free_data)(void *));
-
 /**
  * heap_delete - deletes a heap
  * @heap: the heap in question
