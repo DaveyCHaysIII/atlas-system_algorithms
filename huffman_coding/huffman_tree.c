@@ -22,5 +22,7 @@ binary_tree_node_t *huffman_tree(char *data, size_t *freq, size_t size)
 		huffman_extract_and_insert(priority_queue);
 
 	huffman_root = (binary_tree_node_t *)(priority_queue->root->data);
+	priority_queue->root->data = NULL;
+	heap_delete(priority_queue, NULL);
 	return (huffman_root);
 }
