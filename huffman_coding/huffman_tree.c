@@ -15,7 +15,7 @@ binary_tree_node_t *huffman_tree(char *data, size_t *freq, size_t size)
 	binary_tree_node_t *huffman_root;
 
 	priority_queue = huffman_priority_queue(data, freq, size);
-	if (!priority_queue || priority_queue->size < 2)
+	if (!priority_queue || !priority_queue->root)
 		return (NULL);
 
 	while (priority_queue->size > 1)
