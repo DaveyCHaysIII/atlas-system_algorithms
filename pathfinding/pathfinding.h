@@ -17,8 +17,8 @@
  */
 typedef struct point_s
 {
-    int x;
-    int y;
+	int x;
+	int y;
 } point_t;
 
 queue_t *backtracking_array(char **map,
