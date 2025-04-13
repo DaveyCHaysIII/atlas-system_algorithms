@@ -28,6 +28,7 @@ queue_t *backtracking_array(char **map,
 	if (!map || !rows || !cols || !start || !target)
 		return (NULL);
 
+	int i;
 	int **visited = malloc(rows * sizeof(int *));
 
 	if (!visited)
@@ -48,7 +49,7 @@ queue_t *backtracking_array(char **map,
 		   start->y,
 		   target))
 	{
-		for (int i = 0; i < rows; i++)
+		for (i = 0; i < rows; i++)
 		{
 			free(visited[i]);
 		}
@@ -56,6 +57,11 @@ queue_t *backtracking_array(char **map,
 		free(new_queue);
 		return (NULL);
 	}
+	for (i = 0; i < rows; i++)
+	{
+		free(visited[i]);
+	}
+	free(visited);
 	return (new_queue);
 }
 
