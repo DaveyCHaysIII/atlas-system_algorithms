@@ -29,7 +29,11 @@ queue_t *backtracking_graph(graph_t *graph,
 	if (!visited)
 		return (NULL);
 	new_queue = queue_create();
-
+	if (!new_queue)
+	{
+		free(visited);
+		return (NULL);
+	}
 	if (!btg_recurse(visited,
 			 new_queue,
 			 graph,
@@ -65,13 +69,12 @@ int btg_recurse(int *visited,
 
 	if (!vcurrent || visited[vcurrent->index])
 		return (0);
-
 	visited[vcurrent->index] = 1;
 	printf("Checking %s\n", vcurrent->content);
 
 	if (vcurrent == target)
 	{
-		queue_push_front(q, (void *)vcurrent);
+		queue_push_front(q, strdup(vcurrent->content));
 		return (1);
 	}
 	ecurrent = vcurrent->edges;
@@ -79,7 +82,7 @@ int btg_recurse(int *visited,
 	{
 		if (btg_recurse(visited, q, graph, ecurrent->dest, target))
 		{
-			queue_push_front(q, (void *)ecurrent->dest->content);
+			queue_push_front(q, strdup(vcurrent->content));
 			return (1);
 		}
 		ecurrent = ecurrent->next;
