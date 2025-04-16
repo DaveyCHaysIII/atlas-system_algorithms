@@ -41,6 +41,13 @@ queue_t *dijkstra_graph(graph_t *graph,
 
 	find_dijk(graph, start, target, dist, visited, prev);
 
+	if (prev[target->index] == NULL && target != start)
+	{
+		free(visited);
+		free(dist);
+		free(prev);
+		return (NULL);
+	}
 	q = queue_create();
 	for (vcurrent = (vertex_t *)target;
 	     vcurrent && vcurrent != start;
