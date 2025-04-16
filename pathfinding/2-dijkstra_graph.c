@@ -41,7 +41,7 @@ queue_t *dijkstra_graph(graph_t *graph,
 
 	find_dijk(graph, start, target, dist, visited, prev);
 
-	if (prev[target->index] == NULL && target != start)
+	if (prev[target->index] == NULL)
 	{
 		free(visited);
 		free(dist);
@@ -95,13 +95,13 @@ void find_dijk(graph_t *graph,
 				vcurrent = vert;
 			}
 		}
-
+		if (!vcurrent)
+			break;
 		printf("Checking %s, distance from %s is %d\n",
 			vcurrent->content,
 			start->content,
 			min);
-
-		if (!vcurrent || vcurrent == target)
+		if (vcurrent == target)
 			break;
 
 		/* updates, assigns weights to dist, prev*/
