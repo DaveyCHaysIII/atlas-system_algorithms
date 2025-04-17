@@ -1,2 +1,6 @@
-# atlas-system_algorithms
-Our systems algorithms directory as part of the ATLAS program
+graphs
+huffmans
+pathfinding
+red-black trees
+n-ary trees
+
