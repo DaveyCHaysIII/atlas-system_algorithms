@@ -34,8 +34,6 @@ queue_t *a_star_graph(graph_t *graph,
 	int *score = malloc(graph->nb_vertices * sizeof(int));
 	vertex_t **prev = malloc(sizeof(vertex_t *) * graph->nb_vertices);
 
-	if (!visited || !dist || !prev)
-		return (NULL);
 	for (size_t i = 0; i < graph->nb_vertices; i++)
 	{
 		dist[i] = INT_MAX;
@@ -50,6 +48,7 @@ queue_t *a_star_graph(graph_t *graph,
 		free(visited);
 		free(dist);
 		free(prev);
+		free(score);
 		return (NULL);
 	}
 	q = queue_create();
