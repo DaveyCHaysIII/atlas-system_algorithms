@@ -19,7 +19,7 @@ nary_tree_t *nary_tree_insert(nary_tree_t *parent, char const *str)
 	if (!new_node)
 		return (NULL);
 
-	new_node->content = (char *)str;
+	new_node->content = strdup(str);
 	new_node->parent = NULL;
 	new_node->nb_children = 0;
 	new_node->children = NULL;
