@@ -10,25 +10,28 @@
 
 int path_exists(nary_tree_t const *root, char const * const *path)
 {
-	if (!root || !path)
+	if (!root || !path || !path[0])
 		return (0);
 
-	nary_tree_t *current;
-	size_t i;
+	const nary_tree_t *current = root, *child;
+	size_t i = 0;
 
-	current = root->children;
-	i = 0;
-	while (current != NULL)
+	if (strcmp(root->content, path[0]) != 0)
+		return (0);
+	i++;
+
+	while (path[i])
 	{
-		if (path[i] == NULL)
-			return (1);
-		if (strcmp(current->content, path[i]) == 1)
-		{
-			current = current->children;
-			i++;
-			continue;
-		}
-		current = current->next;
+		child = current->children;
+
+		while (child && strcmp(child->content, path[i]) != 0)
+			child = child->next;
+
+		if (!child)
+			return (0);
+
+		current = child;
+		i++;
 	}
-	return (0);
+	return (1);
 }
